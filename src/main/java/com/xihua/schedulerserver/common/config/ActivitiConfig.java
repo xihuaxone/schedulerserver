@@ -26,6 +26,7 @@ public class ActivitiConfig {
         processEngineConfiguration.setDatabaseSchemaUpdate("true");
         processEngineConfiguration.setActivityFontName("宋体");
         processEngineConfiguration.setLabelFontName("宋体");
+        processEngineConfiguration.setHistory("full");
         return processEngineConfiguration;
     }
 

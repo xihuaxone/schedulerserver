@@ -10,6 +10,6 @@ public class ActivitiInitializer {
     RepositoryService repositoryService;
 
     public void init() {
-        repositoryService.createDeployment().addClasspathResource("bpmns/demo.bpmn").name("demo").deploy();
+        repositoryService.createDeployment().addClasspathResource("bpmns/demoProcess.bpmn").name("demoProcess").deploy();
     }
 }
