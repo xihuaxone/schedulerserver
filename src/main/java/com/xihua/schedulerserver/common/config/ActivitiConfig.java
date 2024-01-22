@@ -15,17 +15,12 @@ public class ActivitiConfig {
     @Autowired
     private PlatformTransactionManager platformTransactionManager;
 
-    //连接池
     @Autowired
     private DruidDataSource dataSource;
 
-    /**
-     * 流程引擎配置对象
-     * @return
-     */
     @Bean
-    public SpringProcessEngineConfiguration processEngineConfiguration(){
-        SpringProcessEngineConfiguration processEngineConfiguration=new SpringProcessEngineConfiguration();
+    public SpringProcessEngineConfiguration processEngineConfiguration() {
+        SpringProcessEngineConfiguration processEngineConfiguration = new SpringProcessEngineConfiguration();
         processEngineConfiguration.setDataSource(dataSource);
         processEngineConfiguration.setTransactionManager(platformTransactionManager);
         processEngineConfiguration.setDatabaseSchemaUpdate("true");
@@ -34,40 +29,35 @@ public class ActivitiConfig {
         return processEngineConfiguration;
     }
 
-    /**
-     * 流程引擎对象的bean
-     * @param processEngineConfiguration
-     * @return
-     */
     @Bean
-    public ProcessEngineFactoryBean processEngine(@Qualifier("processEngineConfiguration") SpringProcessEngineConfiguration processEngineConfiguration){
-        ProcessEngineFactoryBean processEngineFactoryBean=new ProcessEngineFactoryBean();
+    public ProcessEngineFactoryBean processEngine(@Qualifier("processEngineConfiguration") SpringProcessEngineConfiguration processEngineConfiguration) {
+        ProcessEngineFactoryBean processEngineFactoryBean = new ProcessEngineFactoryBean();
         processEngineFactoryBean.setProcessEngineConfiguration(processEngineConfiguration);
         return processEngineFactoryBean;
     }
 
     @Bean
-    public RepositoryService repositoryService(@Qualifier("processEngine") ProcessEngine processEngine){
+    public RepositoryService repositoryService(@Qualifier("processEngine") ProcessEngine processEngine) {
         return processEngine.getRepositoryService();
     }
 
     @Bean
-    public RuntimeService runtimeService(@Qualifier("processEngine") ProcessEngine processEngine){
+    public RuntimeService runtimeService(@Qualifier("processEngine") ProcessEngine processEngine) {
         return processEngine.getRuntimeService();
     }
 
     @Bean
-    public TaskService taskService(@Qualifier("processEngine") ProcessEngine processEngine){
+    public TaskService taskService(@Qualifier("processEngine") ProcessEngine processEngine) {
         return processEngine.getTaskService();
     }
 
     @Bean
-    public IdentityService identityService(@Qualifier("processEngine") ProcessEngine processEngine){
+    public IdentityService identityService(@Qualifier("processEngine") ProcessEngine processEngine) {
         return processEngine.getIdentityService();
     }
 
     @Bean
-    public HistoryService historyService(@Qualifier("processEngine") ProcessEngine processEngine){
+    public HistoryService historyService(@Qualifier("processEngine") ProcessEngine processEngine) {
         return processEngine.getHistoryService();
     }
 }
